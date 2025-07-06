@@ -59,3 +59,8 @@ revision, err := gopedia.Wikipedia.FetchRevision(1297707661)
 
 ### Misc.
 To fetch all available languages for a page and the translated page titles, use the `GetLanguages` method of a page.
+
+## Credit
+For go doc comments, I used the descriptions of the endpoints and parameters from the official Wikimedia API documentation to ensure this package is as clearly documented as possible. 
+
+The API documentation can be found here: https://api.wikimedia.org/wiki/
