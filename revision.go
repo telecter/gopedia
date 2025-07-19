@@ -38,7 +38,7 @@ type PageRevision struct {
 func (project Project) FetchRevision(id int) (PageRevision, error) {
 	path := fmt.Sprintf("/revision/%d/bare", id)
 	var data PageRevision
-	if err := project.request(path, &data); err != nil {
+	if err := project.request("core", path, &data); err != nil {
 		return PageRevision{}, fmt.Errorf("request: %w", err)
 	}
 	return data, nil

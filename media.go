@@ -23,7 +23,7 @@ type File struct {
 
 // A FileArtifact represents the properties of a file.
 type FileArtifact struct {
-	Mediatype string   `json:"mediatype"` // File type, one of: BITMAP, DRAWING, AUDIO, VIDEO, MULTIMEDIA, UNKNOWN, OFFICE, TEXT, EXECUTABLE, ARCHIVE, or 3D.
+	MediaType string   `json:"mediatype"` // File type, one of: BITMAP, DRAWING, AUDIO, VIDEO, MULTIMEDIA, UNKNOWN, OFFICE, TEXT, EXECUTABLE, ARCHIVE, or 3D.
 	Size      *int     `json:"size"`      // File size in bytes or nil if not available
 	Width     *int     `json:"width"`     // Maximum recommended image width in pixels or nil if not available
 	Height    *int     `json:"height"`    // Maximum recommended image height in pixels or nil if not available
@@ -35,7 +35,7 @@ type FileArtifact struct {
 func (project Project) FetchFile(title string) (File, error) {
 	path := fmt.Sprintf("/file/%s", title)
 	var data File
-	if err := project.request(path, &data); err != nil {
+	if err := project.request("core", path, &data); err != nil {
 		return File{}, fmt.Errorf("request: %w", err)
 	}
 	return data, nil

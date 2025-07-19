@@ -3,6 +3,7 @@ package gopedia_test
 import (
 	"gopedia"
 	"testing"
+	"time"
 )
 
 func TestFetchPageBare(t *testing.T) {
@@ -13,6 +14,7 @@ func TestFetchPageBare(t *testing.T) {
 	if page.Title == "" {
 		t.Errorf("page.Title is empty; wanted non-empty")
 	}
+	t.Logf("page.Title = %#v", page.Title)
 }
 
 func TestFetchPageHTML(t *testing.T) {
@@ -47,6 +49,7 @@ func TestGetPageLanguages(t *testing.T) {
 	if len(langs) < 1 {
 		t.Errorf("page.GetLanguages returned empty slice; wanted non-empty")
 	}
+	t.Logf("langs[0].Key = %#v", langs[0].Key)
 }
 
 func TestGetHistory(t *testing.T) {
@@ -61,6 +64,7 @@ func TestGetHistory(t *testing.T) {
 	if len(revisions) < 1 {
 		t.Errorf("page.GetHistory returned empty slice; wanted non-empty")
 	}
+	t.Logf("revisions[0].Timestamp = %#v", revisions[0].Timestamp.Format(time.UnixDate))
 }
 
 func TestFetchFiles(t *testing.T) {
@@ -75,6 +79,7 @@ func TestFetchFiles(t *testing.T) {
 	if len(files) < 1 {
 		t.Errorf("page.FetchFiles returned empty slice; wanted non-empty")
 	}
+	t.Logf("files[0].Title = %#v", files[0].Title)
 }
 
 func TestSearch(t *testing.T) {
@@ -95,6 +100,7 @@ func TestSearch(t *testing.T) {
 			if len(results) < 1 {
 				t.Errorf("Search returned empty slice; wanted non-empty")
 			}
+			t.Logf("results[0].Title = %#v", results[0].Title)
 		})
 	}
 }
@@ -107,6 +113,7 @@ func TestFetchRevision(t *testing.T) {
 	if revision.ID == 0 {
 		t.Errorf("revision.ID is 0; wanted non-zero")
 	}
+	t.Logf("revision.ID = %#v", revision.ID)
 }
 
 func TestFetchFile(t *testing.T) {
@@ -117,4 +124,5 @@ func TestFetchFile(t *testing.T) {
 	if file.Title == "" {
 		t.Errorf("file.Title is empty; wanted non-empty")
 	}
+	t.Logf("file.Title = %#v", file.Title)
 }

@@ -59,7 +59,7 @@ func (project Project) Search(query string, by SearchType, limit int) ([]SearchR
 
 	var data map[string][]SearchResult
 
-	if err := project.request(endpoint.String(), &data); err != nil {
+	if err := project.request("core", endpoint.String(), &data); err != nil {
 		return nil, fmt.Errorf("request search results: %w", err)
 	}
 

@@ -63,7 +63,7 @@ type Page struct {
 func (page Page) GetLanguages() ([]PageLanguage, error) {
 	var data []PageLanguage
 	path := fmt.Sprintf("/page/%s/links/language", page.Key)
-	if err := page.Project.request(path, &data); err != nil {
+	if err := page.Project.request("core", path, &data); err != nil {
 		return nil, fmt.Errorf("request: %w", err)
 	}
 	return data, nil
@@ -73,7 +73,7 @@ func (page Page) GetLanguages() ([]PageLanguage, error) {
 func (page Page) FetchFiles() ([]File, error) {
 	var data map[string][]File
 	path := fmt.Sprintf("/page/%s/links/media", page.Key)
-	if err := page.Project.request(path, &data); err != nil {
+	if err := page.Project.request("core", path, &data); err != nil {
 		return nil, fmt.Errorf("request: %w", err)
 	}
 	files, ok := data["files"]
@@ -120,7 +120,7 @@ func (page Page) GetHistory(olderThan, newerThan int, filter RevisionFilter) ([]
 	var data struct {
 		Revisions []PageRevision `json:"revisions"`
 	}
-	if err := page.Project.request(path.String(), &data); err != nil {
+	if err := page.Project.request("core", path.String(), &data); err != nil {
 		return nil, fmt.Errorf("request: %w", err)
 	}
 	return data.Revisions, nil
@@ -140,7 +140,7 @@ func (project Project) FetchPage(title string, mode PageMode) (Page, error) {
 	path = fmt.Sprintf(path, title)
 
 	var data Page
-	if err := project.request(path, &data); err != nil {
+	if err := project.request("core", path, &data); err != nil {
 		return Page{}, fmt.Errorf("request: %w", err)
 	}
 	data.Project = project
